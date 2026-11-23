@@ -1,90 +1,35 @@
-const products = [
-    { id: 1, name: "Urban Sneakers", price: 5999, image: "https://source.unsplash.com/400x400/?sneakers" },
-    { id: 2, name: "Street Hoodie", price: 3499, image: "https://source.unsplash.com/400x400/?hoodie" },
-    { id: 3, name: "Classic T-Shirt", price: 1999, image: "https://source.unsplash.com/400x400/?tshirt" }
-];
+const navToggle = document.querySelector(".nav-toggle");
+const navLinks = document.querySelector(".nav-links");
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+        navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
 
-function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-}
-
-function updateCartCount() {
-    const count = document.getElementById("cart-count");
-    if (count) count.textContent = cart.length;
-}
-
-function displayProducts() {
-    const grid = document.getElementById("product-grid");
-    if (!grid) return;
-
-    products.forEach(product => {
-        grid.innerHTML += `
-        <div class="product">
-            <img src="${product.image}">
-            <h3>${product.name}</h3>
-            <p>KES ${product.price}</p>
-            <button onclick="viewProduct(${product.id})">View</button>
-        </div>`;
+    navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+            navLinks.classList.remove("open");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.setAttribute("aria-label", "Open menu");
+        });
     });
 }
 
-function viewProduct(id) {
-    localStorage.setItem("selectedProduct", id);
-    window.location.href = "product.html";
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach((item) => observer.observe(item));
+} else {
+    revealItems.forEach((item) => item.classList.add("visible"));
 }
-
-function displayProductDetails() {
-    const container = document.getElementById("product-details");
-    if (!container) return;
-
-    const id = localStorage.getItem("selectedProduct");
-    const product = products.find(p => p.id == id);
-
-    container.innerHTML = `
-        <img src="${product.image}" width="300">
-        <h2>${product.name}</h2>
-        <p>KES ${product.price}</p>
-        <button onclick="addToCart(${product.id})" class="btn">Add to Cart</button>
-    `;
-}
-
-function addToCart(id) {
-    const product = products.find(p => p.id === id);
-    cart.push(product);
-    saveCart();
-    alert("Added to cart!");
-}
-
-function displayCart() {
-    const items = document.getElementById("cart-items");
-    const totalEl = document.getElementById("total-price");
-    if (!items) return;
-
-    let total = 0;
-    items.innerHTML = "";
-
-    cart.forEach(item => {
-        total += item.price;
-        items.innerHTML += `<p>${item.name} - KES ${item.price}</p>`;
-    });
-
-    totalEl.textContent = total;
-}
-
-function placeOrder(e) {
-    e.preventDefault();
-    document.getElementById("order-message").textContent = "Order placed successfully!";
-    cart = [];
-    saveCart();
-}
-
-displayProducts();
-displayProductDetails();
-displayCart();
-updateCartCount();
-
-
-
