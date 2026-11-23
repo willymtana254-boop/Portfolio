@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William Saidi | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+</head>
+<body>
+<!-- Particles Background -->
+<div id="particles-js"></div>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="logo">WS</div>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+            <a href="William_Saidi_CV.pdf" download class="cv-btn">
+                Download CV
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+    <div class="hero-content">
+
+        <img src="profile.jpg.jpg" alt="William Saidi" class="profile-img">
+
+        <h1>William Saidi</h1>
+        <h2>Computer Science Student</h2>
+        <p>
+            Passionate about software development, web technologies,
+            and building practical solutions through code.
+            Love interaction with AI tools in making computing look easy.
+        </p>
+
+        <div class="buttons">
+            <a href="#projects" class="btn primary">View Projects</a>
+            <a href="#contact" class="btn secondary">Contact Me</a>
+        </div>
+    </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+    <h2>About Me</h2>
+    <p>
+        I am a computer science student with a strong interest in
+        software engineering and modern web development.
+        I enjoy building real-world projects and continuously
+        improving my technical skills.
+    </p>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="skills" id="skills">
+    <h2>Skills</h2>
+
+    <div class="skills-container">
+        <div class="skill-card">HTML</div>
+        <div class="skill-card">CSS</div>
+        <div class="skill-card">JavaScript</div>
+        <div class="skill-card">Git & GitHub</div>
+        <div class="skill-card">Python</div>
+        <div class="skill-card">Problem Solving</div>
+    </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section class="projects" id="projects">
+    <h2>Projects</h2>
+
+    <div class="projects-container">
+
+        <div class="project-card">
+            <h3>Portfolio Website</h3>
+            <p>A personal portfolio website built using HTML, CSS and JavaScript.</p>
+            <a href="https://github.com/willymtana254-boop/Portfolio" target="_blank">
+                View on GitHub
+            </a>
+        </div>
+
+        <div class="project-card">
+            <h3>Calculator App</h3>
+            <p>A simple calculator performing arithmetic operations.</p>
+            <a href="https://github.com/willymtana254-boop/calculator" target="_blank">
+                View on GitHub
+            </a>
+        </div>
+
+        <div class="project-card">
+            <h3>To-Do List App</h3>
+            <p>Task management web application.</p>
+            <a href="https://github.com/willymtana254-boop/todo-app" target="_blank">
+                View on GitHub
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+    <h2>Contact Me</h2>
+
+    <p>
+        I am open to internships, collaborations and tech opportunities.
+        Feel free to reach out.
+    </p>
+
+    <div class="contact-links">
+        <a href="mailto:willymtana254@gmail.com?subject=Portfolio Inquiry&body=Hello William, I would like to connect with you.">
+    📧 willymtana254@gmail.com
+        </a>
+        <a href="https://github.com/willymtana254-boop" target="_blank">💻 GitHub</a>
+        <a href="https://linkedin.com/in/william-saidi-708b10289" target="_blank">🔗 LinkedIn</a>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <p>© 2026 William Saidi. All Rights Reserved.</p>
+</footer>
+<!-- Chatbot Button -->
+<div class="chatbot-toggle" onclick="toggleChat()">
+    💬
+</div>
+
+<!-- Chatbot Box -->
+<div class="chatbot" id="chatbot">
+    <div class="chat-header">
+        William AI Assistant
+        <span onclick="toggleChat()">✖</span>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+        <div class="bot-message">
+            Hi 👋 I am William's assistant. Ask me about his skills, projects, or contact info.
+        </div>
+    </div>
+
+    <div class="chat-footer">
+        <input type="text" id="userInput" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+<script>
+function toggleChat() {
+    const chat = document.getElementById("chatbot");
+    chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+}
+
+function sendMessage() {
+    const input = document.getElementById("userInput");
+    const message = input.value.toLowerCase();
+    const chatBody = document.getElementById("chatBody");
+
+    if (!message) return;
+
+    // Show user message
+    chatBody.innerHTML += `<div class="user-message">${message}</div>`;
+
+    let response = "Sorry, I didn't understand that.";
+
+    if (message.includes("skills")) {
+        response = "William is skilled in Web Development, JavaScript, React, and Backend Development.";
+    } else if (message.includes("projects")) {
+        response = "He has built a football analysis app, university portal, and AI-powered systems.";
+    } else if (message.includes("contact")) {
+        response = "You can email him at willymtana254@gmail.com.";
+    } else if (message.includes("who are you")) {
+        response = "William is a Computer Scientist and Web Developer passionate about innovation.";
+    }
+
+    chatBody.innerHTML += `<div class="bot-message">${response}</div>`;
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+    input.value = "";
+}
+</script>
+</body>
+</html>
+
+
+
+

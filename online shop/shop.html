@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UrbanVault | Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>URBANVAULT</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+</header>
+
+<section class="products">
+    <h2>Our Collection</h2>
+
+    <!-- Category Filter Buttons -->
+    <div class="categories">
+        <button onclick="filterProducts('all')">All</button>
+        <button onclick="filterProducts('shoes')">Shoes</button>
+        <button onclick="filterProducts('hoodies')">Hoodies</button>
+        <button onclick="filterProducts('tshirts')">T-Shirts</button>
+    </div>
+
+    <div class="product-grid" id="product-grid"></div>
+</section>
+
+
+<footer>
+    <p>© 2026 UrbanVault</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
